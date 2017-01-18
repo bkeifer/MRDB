@@ -7,14 +7,12 @@
 {% if railroadList %}
     <table class="table table-striped table-bordered">
         <tr>
-            <th>ID</th>
             <th>Reporting Mark</th>
             <th>Name</th>
             <th>Actions</th>
         </tr>
         {% for railroad in railroadList %}
         <tr>
-            <td>{{ railroad.id }}</td>
             <td>{{ railroad.mark }}</td>
             <td>{{ railroad.name }}</td>
             <td>

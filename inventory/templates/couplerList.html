@@ -1,0 +1,30 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Couplers{% endblock %}
+
+{% block content %}
+
+{% if couplerList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Manufacturer</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for coupler in couplerList %}
+        <tr>
+            <td>{{ coupler.manufacturer }}</td>
+            <td>{{ coupler.name }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/coupler/{{coupler.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/coupler/{{coupler.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No couplers created.</p>
+{% endif %}
+<a class="btn btn-success" href="/coupler/create">New Coupler</a>
+<p>
+{% endblock %}

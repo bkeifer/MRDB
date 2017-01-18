@@ -1,0 +1,28 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+        {% endblock %}
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="https://use.fontawesome.com/30b9263678.js"></script>
+        <!-- <script>
+            $(function() {
+                $( "#tabs" ).tabs();
+            });
+        </script> -->
+    </head>
+    <body>
+        <div class="container">
+        {% block nav %}{% include 'include/nav.html' %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block javascript %}
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% endblock %}
+        {% block footer %}{% include 'include/footer.html' %}{% endblock %}
+        </div>
+    </body>
+</html>

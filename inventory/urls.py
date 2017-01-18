@@ -5,6 +5,11 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
 
+    url(r'^cartype/list/$', views.cartype_list, name='cartype_list'),
+    url(r'^cartype/create/$', views.cartype_create, name='cartype_create'),
+    url(r'^cartype/(?P<cartype_id>[0-9]+)/edit/$', views.cartype_edit, name='cartype_edit'),
+    url(r'^cartype/(?P<cartype_id>[0-9]+)/delete/$', views.cartype_delete, name='cartype_delete'),
+
     url(r'^coupler/list/$', views.coupler_list, name='coupler_list'),
     url(r'^coupler/create/$', views.coupler_create, name='coupler_create'),
     url(r'^coupler/(?P<coupler_id>[0-9]+)/edit/$', views.coupler_edit, name='coupler_edit'),

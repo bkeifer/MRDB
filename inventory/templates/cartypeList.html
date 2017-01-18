@@ -1,0 +1,28 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Car Types{% endblock %}
+
+{% block content %}
+
+{% if cartypeList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+        {% for cartype in cartypeList %}
+        <tr>
+            <td>{{ cartype.name }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/cartype/{{cartype.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/cartype/{{cartype.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No car types created.</p>
+{% endif %}
+<a class="btn btn-success" href="/cartype/create">New Car Type</a>
+<p>
+{% endblock %}

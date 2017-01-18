@@ -2,10 +2,10 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import CouplerForm, MakeForm, ManufacturerForm, ModelForm
-from .forms import RailroadForm
+from .forms import CarTypeForm, CouplerForm, MakeForm, ManufacturerForm
+from .forms import ModelForm, RailroadForm
 
-from .models import Coupler, Make, Manufacturer, Model, Railroad
+from .models import CarType, Coupler, Make, Manufacturer, Model, Railroad
 # Create your views here.
 
 def index(request):
@@ -15,6 +15,57 @@ def index(request):
     context = {
         'title': "MRDB",
         'manufacturerList': manufacturerList,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+# --------------------------------------------------------[ CAR TYPE ]----------
+def cartype_create(request):
+    if request.method == "POST":
+        form = CarTypeForm(request.POST)
+        if form.is_valid():
+            cartype = form.save()
+            return redirect('cartype_list')
+    else:
+        form = CarTypeForm()
+
+    template = loader.get_template('cartypeEdit.html')
+    context = {
+        'title': "New CarType",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def cartype_delete(request, cartype_id):
+    try:
+        cartype = CarType.objects.get(id=cartype_id)
+        cartype.delete()
+        return redirect('cartype_list')
+    except:
+        noop = ""
+
+def cartype_edit(request, cartype_id):
+    cartype = get_object_or_404(CarType, pk=cartype_id)
+    if request.method == "POST":
+        form = CarTypeForm(request.POST, instance=cartype)
+        if form.is_valid():
+            cartype = form.save()
+            return redirect('cartype_list')
+    else:
+        form = CarTypeForm(instance=cartype)
+
+    template = loader.get_template('cartypeEdit.html')
+    context = {
+        'title': "Edit CarType",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def cartype_list(request):
+    cartypeList = CarType.objects.order_by('name')
+    template = loader.get_template('cartypeList.html')
+    context = {
+        'cartypeList': cartypeList,
     }
     return HttpResponse(template.render(context, request))
 

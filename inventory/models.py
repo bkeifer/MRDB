@@ -70,7 +70,6 @@ class StockType(models.Model):
 
 class CarType(models.Model):
     name = models.CharField(max_length=25)
-    stocktype = models.ForeignKey(StockType, on_delete=models.CASCADE)
 
     class Meta:
         db_table = "cartype"

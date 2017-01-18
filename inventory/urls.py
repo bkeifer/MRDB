@@ -10,6 +10,11 @@ urlpatterns = [
     url(r'^coupler/(?P<coupler_id>[0-9]+)/edit/$', views.coupler_edit, name='coupler_edit'),
     url(r'^coupler/(?P<coupler_id>[0-9]+)/delete/$', views.coupler_delete, name='coupler_delete'),
 
+    url(r'^make/list/$', views.make_list, name='make_list'),
+    url(r'^make/create/$', views.make_create, name='make_create'),
+    url(r'^make/(?P<make_id>[0-9]+)/edit/$', views.make_edit, name='make_edit'),
+    url(r'^make/(?P<make_id>[0-9]+)/delete/$', views.make_delete, name='make_delete'),
+
     url(r'^manufacturer/list/$', views.manufacturer_list, name='manufacturer_list'),
     url(r'^manufacturer/create/$', views.manufacturer_create, name='manufacturer_create'),
     url(r'^manufacturer/(?P<manufacturer_id>[0-9]+)/edit/$', views.manufacturer_edit, name='manufacturer_edit'),

@@ -1,0 +1,28 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Makes{% endblock %}
+
+{% block content %}
+
+{% if makeList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for make in makeList %}
+        <tr>
+            <td>{{ make.name }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/make/{{make.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/make/{{make.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No makes created.</p>
+{% endif %}
+<a class="btn btn-success" href="/make/create">New Make</a>
+<p>
+{% endblock %}

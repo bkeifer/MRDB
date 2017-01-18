@@ -2,9 +2,9 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import CouplerForm, ManufacturerForm, RailroadForm
+from .forms import CouplerForm, MakeForm, ManufacturerForm, RailroadForm
 
-from .models import Coupler, Manufacturer, Railroad
+from .models import Coupler, Make, Manufacturer, Railroad
 # Create your views here.
 
 def index(request):
@@ -118,6 +118,57 @@ def railroad_list(request):
         'railroadList': railroadList,
     }
     return HttpResponse(template.render(context, request))
+
+
+# --------------------------------------------------------[ MAKE ]--------------
+def make_create(request):
+    if request.method == "POST":
+        form = MakeForm(request.POST)
+        if form.is_valid():
+            make = form.save()
+            return redirect('make_list')
+    else:
+        form = MakeForm()
+
+    template = loader.get_template('makeEdit.html')
+    context = {
+        'title': "New Make",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def make_edit(request, make_id):
+    make = get_object_or_404(Make, pk=make_id)
+    if request.method == "POST":
+        form = MakeForm(request.POST, instance=make)
+        if form.is_valid():
+            make = form.save()
+            return redirect('make_list')
+    else:
+        form = MakeForm(instance=make)
+
+    template = loader.get_template('makeEdit.html')
+    context = {
+        'title': "Edit Make",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def make_list(request):
+    makeList = Make.objects.order_by('name')
+    template = loader.get_template('makeList.html')
+    context = {
+        'makeList': makeList,
+    }
+    return HttpResponse(template.render(context, request))
+
+def make_delete(request, make_id):
+    try:
+        make = Make.objects.get(id=make_id)
+        make.delete()
+        return redirect('make_list')
+    except:
+        noop = ""
 
 
 # --------------------------------------------------------[ MANUFACTURER ]------

@@ -1,0 +1,30 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Models{% endblock %}
+
+{% block content %}
+
+{% if modelList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Actions</th>
+        </tr>
+        {% for model in modelList %}
+        <tr>
+            <td>{{ model.make }}</td>
+            <td>{{ model.name }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/model/{{model.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/model/{{model.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No models created.</p>
+{% endif %}
+<a class="btn btn-success" href="/model/create">New Model</a>
+<p>
+{% endblock %}

@@ -20,6 +20,11 @@ urlpatterns = [
     url(r'^manufacturer/(?P<manufacturer_id>[0-9]+)/edit/$', views.manufacturer_edit, name='manufacturer_edit'),
     url(r'^manufacturer/(?P<manufacturer_id>[0-9]+)/delete/$', views.manufacturer_delete, name='manufacturer_delete'),
 
+    url(r'^model/list/$', views.model_list, name='model_list'),
+    url(r'^model/create/$', views.model_create, name='model_create'),
+    url(r'^model/(?P<model_id>[0-9]+)/edit/$', views.model_edit, name='model_edit'),
+    url(r'^model/(?P<model_id>[0-9]+)/delete/$', views.model_delete, name='model_delete'),
+
     url(r'^railroad/list/$', views.railroad_list, name='railroad_list'),
     url(r'^railroad/create/$', views.railroad_create, name='railroad_create'),
     url(r'^railroad/(?P<railroad_id>[0-9]+)/edit/$', views.railroad_edit, name='railroad_edit'),

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Coupler, Make, Manufacturer, Railroad
+from .models import Coupler, Make, Manufacturer, Model, Railroad
 
 class CouplerForm(forms.ModelForm):
 
@@ -21,6 +21,13 @@ class ManufacturerForm(forms.ModelForm):
     class Meta:
         model = Manufacturer
         fields = ('name','url')
+
+
+class ModelForm(forms.ModelForm):
+
+    class Meta:
+        model = Model
+        fields = ('make', 'name')
 
 
 class RailroadForm(forms.ModelForm):

@@ -2,9 +2,10 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import CouplerForm, MakeForm, ManufacturerForm, RailroadForm
+from .forms import CouplerForm, MakeForm, ManufacturerForm, ModelForm
+from .forms import RailroadForm
 
-from .models import Coupler, Make, Manufacturer, Railroad
+from .models import Coupler, Make, Manufacturer, Model, Railroad
 # Create your views here.
 
 def index(request):
@@ -220,3 +221,54 @@ def manufacturer_delete(request, manufacturer_id):
         return redirect('manufacturer_list')
     except:
         noop = ""
+
+
+# --------------------------------------------------------[ MODEL ]-------------
+def model_create(request):
+    if request.method == "POST":
+        form = ModelForm(request.POST)
+        if form.is_valid():
+            model = form.save()
+            return redirect('model_list')
+    else:
+        form = ModelForm()
+
+    template = loader.get_template('modelEdit.html')
+    context = {
+        'title': "New Model",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def model_delete(request, model_id):
+    try:
+        model = Model.objects.get(id=model_id)
+        model.delete()
+        return redirect('model_list')
+    except:
+        noop = ""
+
+def model_edit(request, model_id):
+    model = get_object_or_404(Model, pk=model_id)
+    if request.method == "POST":
+        form = ModelForm(request.POST, instance=model)
+        if form.is_valid():
+            model = form.save()
+            return redirect('model_list')
+    else:
+        form = ModelForm(instance=model)
+
+    template = loader.get_template('modelEdit.html')
+    context = {
+        'title': "Edit Model",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def model_list(request):
+    modelList = Model.objects.order_by('make', 'name')
+    template = loader.get_template('modelList.html')
+    context = {
+        'modelList': modelList,
+    }
+    return HttpResponse(template.render(context, request))

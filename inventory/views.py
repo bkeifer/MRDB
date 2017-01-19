@@ -3,9 +3,9 @@ from django.template import loader
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CarTypeForm, CouplerForm, MakeForm, ManufacturerForm
-from .forms import ModelForm, RailroadForm
+from .forms import ModelForm, PowerForm, RailroadForm
 
-from .models import CarType, Coupler, Make, Manufacturer, Model, Railroad
+from .models import CarType, Coupler, Make, Manufacturer, Model, Power, Railroad
 # Create your views here.
 
 def index(request):
@@ -117,6 +117,57 @@ def coupler_list(request):
     template = loader.get_template('couplerList.html')
     context = {
         'couplerList': couplerList,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+# --------------------------------------------------------[ POWER ]-------------
+def power_create(request):
+    if request.method == "POST":
+        form = PowerForm(request.POST)
+        if form.is_valid():
+            power = form.save()
+            return redirect('power_list')
+    else:
+        form = PowerForm()
+
+    template = loader.get_template('powerEdit.html')
+    context = {
+        'title': "New Power",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def power_delete(request, power_id):
+    try:
+        power = Power.objects.get(id=power_id)
+        power.delete()
+        return redirect('power_list')
+    except:
+        noop = ""
+
+def power_edit(request, power_id):
+    power = get_object_or_404(Power, pk=power_id)
+    if request.method == "POST":
+        form = PowerForm(request.POST, instance=power)
+        if form.is_valid():
+            power = form.save()
+            return redirect('power_list')
+    else:
+        form = PowerForm(instance=power)
+
+    template = loader.get_template('powerEdit.html')
+    context = {
+        'title': "Edit Power",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def power_list(request):
+    powerList = Power.objects.order_by('name')
+    template = loader.get_template('powerList.html')
+    context = {
+        'powerList': powerList,
     }
     return HttpResponse(template.render(context, request))
 

@@ -91,6 +91,17 @@ class RollingStock(models.Model):
     class Meta:
         abstract = True
 
+
+class Power(models.Model):
+    name = models.CharField(max_length=25)
+
+    class Meta:
+        db_table = "power"
+        ordering = ["name"]
+    def __str__(self):
+        return self.name
+
+        
 class Locomotive(RollingStock):
     make = models.ForeignKey(Make, on_delete=models.CASCADE)
     model = models.ForeignKey(Model, on_delete=models.CASCADE)

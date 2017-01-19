@@ -1,0 +1,28 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Power Types{% endblock %}
+
+{% block content %}
+
+{% if powerList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for power in powerList %}
+        <tr>
+            <td>{{ power.name }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/power/{{power.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/power/{{power.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No powers created.</p>
+{% endif %}
+<a class="btn btn-success" href="/power/create">New Power Type</a>
+<p>
+{% endblock %}

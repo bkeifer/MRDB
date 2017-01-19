@@ -30,6 +30,11 @@ urlpatterns = [
     url(r'^model/(?P<model_id>[0-9]+)/edit/$', views.model_edit, name='model_edit'),
     url(r'^model/(?P<model_id>[0-9]+)/delete/$', views.model_delete, name='model_delete'),
 
+    url(r'^power/list/$', views.power_list, name='power_list'),
+    url(r'^power/create/$', views.power_create, name='power_create'),
+    url(r'^power/(?P<power_id>[0-9]+)/edit/$', views.power_edit, name='power_edit'),
+    url(r'^power/(?P<power_id>[0-9]+)/delete/$', views.power_delete, name='power_delete'),
+
     url(r'^railroad/list/$', views.railroad_list, name='railroad_list'),
     url(r'^railroad/create/$', views.railroad_create, name='railroad_create'),
     url(r'^railroad/(?P<railroad_id>[0-9]+)/edit/$', views.railroad_edit, name='railroad_edit'),

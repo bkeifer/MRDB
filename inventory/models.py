@@ -83,7 +83,7 @@ class RollingStock(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     number = models.IntegerField()
     coupler = models.ForeignKey(Coupler, on_delete=models.CASCADE)
-    length = models.IntegerField()
+    length = models.IntegerField(null=True)
     stocktype = models.ForeignKey(StockType, on_delete=models.CASCADE)
     year = models.IntegerField(null=True)
     modelnumber = models.CharField(max_length=20, null=True)
@@ -107,6 +107,7 @@ class Locomotive(RollingStock):
     model = models.ForeignKey(Model, on_delete=models.CASCADE)
     power = models.ForeignKey(Power, on_delete=models.CASCADE)
     axles = models.IntegerField()
+    address = models.IntegerField()
 
     class Meta:
         db_table = "locomotive"

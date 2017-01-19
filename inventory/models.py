@@ -101,10 +101,11 @@ class Power(models.Model):
     def __str__(self):
         return self.name
 
-        
+
 class Locomotive(RollingStock):
     make = models.ForeignKey(Make, on_delete=models.CASCADE)
     model = models.ForeignKey(Model, on_delete=models.CASCADE)
+    power = models.ForeignKey(Power, on_delete=models.CASCADE)
     axles = models.IntegerField()
 
     class Meta:

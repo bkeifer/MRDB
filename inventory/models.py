@@ -83,9 +83,9 @@ class RollingStock(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     number = models.IntegerField()
     coupler = models.ForeignKey(Coupler, null=True, on_delete=models.CASCADE)
-    length = models.IntegerField(null=True)
+    length = models.IntegerField(null=True, blank=True)
     stocktype = models.ForeignKey(StockType, on_delete=models.CASCADE)
-    year = models.IntegerField(null=True)
+    year = models.IntegerField(null=True, blank=True)
     modelnumber = models.CharField(max_length=20, null=True)
 
     class Meta:
@@ -106,8 +106,8 @@ class Locomotive(RollingStock):
     make = models.ForeignKey(Make, on_delete=models.CASCADE)
     model = models.ForeignKey(Model, on_delete=models.CASCADE)
     power = models.ForeignKey(Power, on_delete=models.CASCADE)
-    axles = models.IntegerField(null=True)
-    address = models.IntegerField(null=True)
+    axles = models.IntegerField(null=True, blank=True)
+    address = models.IntegerField(null=True, blank=True)
 
     class Meta:
         db_table = "locomotive"

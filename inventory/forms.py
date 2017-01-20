@@ -1,6 +1,7 @@
 from django import forms
 
-from .models import CarType, Coupler, Make, Manufacturer, Model, Power, Railroad
+from .models import CarType, Coupler, Locomotive, Make, Manufacturer, Model, Power
+from .models import Railroad
 
 class CarTypeForm(forms.ModelForm):
 
@@ -14,6 +15,13 @@ class CouplerForm(forms.ModelForm):
     class Meta:
         model = Coupler
         fields = ('manufacturer', 'name')
+
+
+class LocomotiveForm(forms.ModelForm):
+    # stocktype = forms.IntegerField(widget=forms.HiddenInput(), initial=1)
+    class Meta:
+        model = Locomotive
+        fields = ('railroad', 'manufacturer', 'number', 'address', 'coupler', 'length', 'power', 'stocktype', 'year', 'modelnumber', 'make', 'model', 'power', 'axles')
 
 
 class MakeForm(forms.ModelForm):

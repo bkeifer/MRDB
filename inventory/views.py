@@ -1,11 +1,13 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404, redirect, render
+from django.forms import HiddenInput
 
-from .forms import CarTypeForm, CouplerForm, MakeForm, ManufacturerForm
-from .forms import ModelForm, PowerForm, RailroadForm
+from .forms import CarTypeForm, CouplerForm, LocomotiveForm, MakeForm
+from .forms import ManufacturerForm, ModelForm, PowerForm, RailroadForm
 
-from .models import CarType, Coupler, Make, Manufacturer, Model, Power, Railroad
+from .models import CarType, Coupler, Locomotive, Make, Manufacturer, Model
+from .models import Power, Railroad, StockType
 # Create your views here.
 
 def index(request):
@@ -168,6 +170,58 @@ def power_list(request):
     template = loader.get_template('powerList.html')
     context = {
         'powerList': powerList,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+# --------------------------------------------------------[ LOCOMOTIVE ]--------
+def locomotive_create(request):
+    if request.method == "POST":
+        form = LocomotiveForm(request.POST)
+        if form.is_valid():
+            locomotive = form.save()
+            return redirect('locomotive_list')
+    else:
+        form = LocomotiveForm(initial={'stocktype': get_object_or_404(StockType, pk=1)})
+        form.fields['stocktype'].widget = HiddenInput()
+
+    template = loader.get_template('locomotiveEdit.html')
+    context = {
+        'title': "New Locomotive",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def locomotive_delete(request, locomotive_id):
+    try:
+        locomotive = Locomotive.objects.get(id=locomotive_id)
+        locomotive.delete()
+        return redirect('locomotive_list')
+    except:
+        noop = ""
+
+def locomotive_edit(request, locomotive_id):
+    locomotive = get_object_or_404(Locomotive, pk=locomotive_id)
+    if request.method == "POST":
+        form = LocomotiveForm(request.POST, instance=locomotive)
+        if form.is_valid():
+            locomotive = form.save()
+            return redirect('locomotive_list')
+    else:
+        form = LocomotiveForm(instance=locomotive)
+
+    template = loader.get_template('locomotiveEdit.html')
+    context = {
+        'title': "Edit Locomotive",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def locomotive_list(request):
+    locomotiveList = Locomotive.objects.order_by('railroad', 'number')
+    template = loader.get_template('locomotiveList.html')
+    context = {
+        'locomotiveList': locomotiveList,
     }
     return HttpResponse(template.render(context, request))
 

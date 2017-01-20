@@ -15,6 +15,11 @@ urlpatterns = [
     url(r'^coupler/(?P<coupler_id>[0-9]+)/edit/$', views.coupler_edit, name='coupler_edit'),
     url(r'^coupler/(?P<coupler_id>[0-9]+)/delete/$', views.coupler_delete, name='coupler_delete'),
 
+    url(r'^locomotive/list/$', views.locomotive_list, name='locomotive_list'),
+    url(r'^locomotive/create/$', views.locomotive_create, name='locomotive_create'),
+    url(r'^locomotive/(?P<locomotive_id>[0-9]+)/edit/$', views.locomotive_edit, name='locomotive_edit'),
+    url(r'^locomotive/(?P<locomotive_id>[0-9]+)/delete/$', views.locomotive_delete, name='locomotive_delete'),
+
     url(r'^make/list/$', views.make_list, name='make_list'),
     url(r'^make/create/$', views.make_create, name='make_create'),
     url(r'^make/(?P<make_id>[0-9]+)/edit/$', views.make_edit, name='make_edit'),

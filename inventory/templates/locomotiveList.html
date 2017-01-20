@@ -1,0 +1,50 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Locomotives{% endblock %}
+
+{% block content %}
+
+{% if locomotiveList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Railroad</th>
+            <th>Number</th>
+            <th>Address</th>
+            <th>Power</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Axles</th>
+            <th>Coupler</th>
+            <th>Length</th>
+            <th>Manufacturer</th>
+            <th>Year</th>
+            <th>Model Number</th>
+            <th>Actions</th>
+        </tr>
+        {% for locomotive in locomotiveList %}
+        <tr>
+          <td>{{ locomotive.railroad }}</td>
+          <td>{{ locomotive.number }}</td>
+          <td>{{ locomotive.address }}</td>
+          <td>{{ locomotive.power }}</td>
+          <td>{{ locomotive.make }}</td>
+          <td>{{ locomotive.model }}</td>
+          <td>{{ locomotive.axles }}</td>
+          <td>{{ locomotive.coupler }}</td>
+          <td>{{ locomotive.length }}</td>
+          <td>{{ locomotive.manufacturer }}</td>
+          <td>{{ locomotive.year }}</td>
+          <td>{{ locomotive.modelnumber }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/locomotive/{{locomotive.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/locomotive/{{locomotive.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No locomotives created.</p>
+{% endif %}
+<a class="btn btn-success" href="/locomotive/create">New Locomotive</a>
+<p>
+{% endblock %}

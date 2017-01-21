@@ -12,7 +12,7 @@ class Railroad(models.Model):
         db_table = "railroad"
         ordering = ["name"]
     def __str__(self):
-        return self.name
+        return self.mark + " - " + self.name
 
 
 class Manufacturer(models.Model):

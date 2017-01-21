@@ -3,10 +3,10 @@ from django.template import loader
 from django.shortcuts import get_object_or_404, redirect, render
 from django.forms import HiddenInput
 
-from .forms import CarTypeForm, CouplerForm, LocomotiveForm, MakeForm
+from .forms import CarForm, CarTypeForm, CouplerForm, LocomotiveForm, MakeForm
 from .forms import ManufacturerForm, ModelForm, PowerForm, RailroadForm
 
-from .models import CarType, Coupler, Locomotive, Make, Manufacturer, Model
+from .models import Car, CarType, Coupler, Locomotive, Make, Manufacturer, Model
 from .models import Power, Railroad, StockType
 # Create your views here.
 
@@ -17,6 +17,58 @@ def index(request):
     context = {
         'title': "MRDB",
         'manufacturerList': manufacturerList,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+# --------------------------------------------------------[ CAR ]---------------
+def car_create(request):
+    if request.method == "POST":
+        form = CarForm(request.POST)
+        if form.is_valid():
+            car = form.save()
+            return redirect('car_list')
+    else:
+        form = CarForm(initial={'stocktype': get_object_or_404(StockType, pk=2)})
+        form.fields['stocktype'].widget = HiddenInput()
+
+    template = loader.get_template('carEdit.html')
+    context = {
+        'title': "New Car",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def car_delete(request, car_id):
+    try:
+        car = Car.objects.get(id=car_id)
+        car.delete()
+        return redirect('car_list')
+    except:
+        noop = ""
+
+def car_edit(request, car_id):
+    car = get_object_or_404(Car, pk=car_id)
+    if request.method == "POST":
+        form = CarForm(request.POST, instance=car)
+        if form.is_valid():
+            car = form.save()
+            return redirect('car_list')
+    else:
+        form = CarForm(instance=car)
+
+    template = loader.get_template('carEdit.html')
+    context = {
+        'title': "Edit Car",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def car_list(request):
+    carList = Car.objects.order_by('railroad', 'number')
+    template = loader.get_template('carList.html')
+    context = {
+        'carList': carList,
     }
     return HttpResponse(template.render(context, request))
 

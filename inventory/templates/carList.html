@@ -22,11 +22,11 @@
           <td>{{ car.railroad.mark }} {{ car.number }}</td>
           <td>{{ car.type }}</td>
           <td>{{ car.coupler }}</td>
-          <td>{{ car.length }}</td>
-          <td>{{ car.livery }}</td>
-          <td>{{ car.manufacturer }}</td>
-          <td>{{ car.year }}</td>
-          <td>{{ car.modelnumber }}</td>
+          <td>{{ car.length|default_if_none:'' }}</td>
+          <td>{{ car.livery|default_if_none:'' }}</td>
+          <td>{{ car.manufacturer|default_if_none:'' }}</td>
+          <td>{{ car.year|default_if_none:'' }}</td>
+          <td>{{ car.modelnumber|default_if_none:'' }}</td>
             <td>
                 <a class="btn btn-xs btn-info" href="/car/{{car.id}}/edit">Edit</a>
                 <a class="btn btn-xs btn-danger" href="/car/{{car.id}}/delete">Delete</a>

@@ -31,10 +31,10 @@
           <td>{{ locomotive.model }}</td>
           <td>{{ locomotive.axles }}</td>
           <td>{{ locomotive.coupler }}</td>
-          <td>{{ locomotive.length }}</td>
-          <td>{{ locomotive.manufacturer }}</td>
-          <td>{{ locomotive.year }}</td>
-          <td>{{ locomotive.modelnumber }}</td>
+          <td>{{ locomotive.length|default_if_none:'' }}</td>
+          <td>{{ locomotive.manufacturer|default_if_none:'' }}</td>
+          <td>{{ locomotive.year|default_if_none:'' }}</td>
+          <td>{{ locomotive.modelnumber|default_if_none:'' }}</td>
             <td>
                 <a class="btn btn-xs btn-info" href="/locomotive/{{locomotive.id}}/edit">Edit</a>
                 <a class="btn btn-xs btn-danger" href="/locomotive/{{locomotive.id}}/delete">Delete</a>

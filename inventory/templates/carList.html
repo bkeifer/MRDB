@@ -21,7 +21,7 @@
         <tr>
           <td>{{ car.railroad.mark }} {{ car.number }}</td>
           <td>{{ car.type }}</td>
-          <td>{{ car.coupler }}</td>
+          <td>{{ car.coupler|default_if_none:'' }}</td>
           <td>{{ car.length|default_if_none:'' }}</td>
           <td>{{ car.livery|default_if_none:'' }}</td>
           <td>{{ car.manufacturer|default_if_none:'' }}</td>

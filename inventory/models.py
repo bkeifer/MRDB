@@ -83,7 +83,7 @@ class RollingStock(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, null=True, blank=True, on_delete=models.CASCADE)
     number = models.IntegerField()
     livery = models.CharField(max_length=50, null=True, blank=True)
-    coupler = models.ForeignKey(Coupler, null=True, on_delete=models.CASCADE)
+    coupler = models.ForeignKey(Coupler, null=True, blank=True, on_delete=models.CASCADE)
     length = models.IntegerField(null=True, blank=True)
     stocktype = models.ForeignKey(StockType, on_delete=models.CASCADE)
     year = models.IntegerField(null=True, blank=True)

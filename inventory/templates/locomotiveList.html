@@ -30,7 +30,7 @@
           <td>{{ locomotive.make }}</td>
           <td>{{ locomotive.model }}</td>
           <td>{{ locomotive.axles }}</td>
-          <td>{{ locomotive.coupler }}</td>
+          <td>{{ locomotive.coupler|default_if_none:'' }}</td>
           <td>{{ locomotive.length|default_if_none:'' }}</td>
           <td>{{ locomotive.manufacturer|default_if_none:'' }}</td>
           <td>{{ locomotive.year|default_if_none:'' }}</td>

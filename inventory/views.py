@@ -11,12 +11,18 @@ from .models import Power, Railroad, StockType
 # Create your views here.
 
 def index(request):
+    carList = Car.objects.order_by('id')
+    locomotiveList = Locomotive.objects.order_by('id')
     manufacturerList = Manufacturer.objects.order_by('id')
+    railroadList = Railroad.objects.order_by('id')
 
     template = loader.get_template('index.html')
     context = {
         'title': "MRDB",
+        'carList': carList,
+        'locomotiveList': locomotiveList,
         'manufacturerList': manufacturerList,
+        'railroadList': railroadList
     }
     return HttpResponse(template.render(context, request))
 

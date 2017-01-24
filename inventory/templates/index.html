@@ -3,20 +3,50 @@
 {% block title %}Model Railroad Database Administration{% endblock %}
 
 {% block content %}
-
+<h1>Model Railroad Database</h1>
 <div class="jumbotron">
   <h2>Live Database Statistics</h2>
   <div class="row">
-      <div class="col-md-3">
-          <div class="panel panel-primary">
-              <div class="panel-heading">
-                  <h3 class="panel-title">Manufacturers</h3>
-              </div>
-              <div class="panel-body" align="center">
-                  <h2>{{ manufacturerList|length }}</h2>
-              </div>
-          </div>
-      </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Locomotives</h3>
+            </div>
+            <div class="panel-body" align="center">
+                <h2>{{ locomotiveList|length }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cars</h3>
+            </div>
+            <div class="panel-body" align="center">
+                <h2>{{ carList|length }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Railroads</h3>
+            </div>
+            <div class="panel-body" align="center">
+                <h2>{{ railroadList|length }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Manufacturers</h3>
+            </div>
+            <div class="panel-body" align="center">
+                <h2>{{ manufacturerList|length }}</h2>
+            </div>
+        </div>
+    </div>
   </div>
 </div>
 

@@ -15,6 +15,7 @@
             <th>Model</th>
             <th>Axles</th>
             <th>Coupler</th>
+            <th>Tuned?</th>
             <th>Length</th>
             <th>Manufacturer</th>
             <th>Year</th>
@@ -31,6 +32,7 @@
           <td>{{ locomotive.model }}</td>
           <td>{{ locomotive.axles }}</td>
           <td>{{ locomotive.coupler|default_if_none:'' }}</td>
+          <td>{{ locomotive.couplerTuned|default_if_none:'' }}</td>
           <td>{{ locomotive.length|default_if_none:'' }}</td>
           <td>{{ locomotive.manufacturer|default_if_none:'' }}</td>
           <td>{{ locomotive.year|default_if_none:'' }}</td>

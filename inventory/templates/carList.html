@@ -10,6 +10,7 @@
             <th>Mark/Number</th>
             <th>Type</th>
             <th>Coupler</th>
+            <th>Tuned?</th>
             <th>Length</th>
             <th>Livery</th>
             <th>Manufacturer</th>
@@ -22,6 +23,7 @@
           <td>{{ car.railroad.mark }} {{ car.number }}</td>
           <td>{{ car.type }}</td>
           <td>{{ car.coupler|default_if_none:'' }}</td>
+          <td>{{ car.couplerTuned|default_if_none:'' }}</td>
           <td>{{ car.length|default_if_none:'' }}</td>
           <td>{{ car.livery|default_if_none:'' }}</td>
           <td>{{ car.manufacturer|default_if_none:'' }}</td>

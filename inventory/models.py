@@ -34,7 +34,10 @@ class Coupler(models.Model):
         db_table = "coupler"
         ordering = ["name"]
     def __str__(self):
-        return self.name
+        if self.manufacturer.name == "Kadee":
+            return "Kadee " + self.name
+        else:
+            return self.name
 
 
 class Make(models.Model):

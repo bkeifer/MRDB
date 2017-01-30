@@ -28,16 +28,15 @@
           <td>{{ locomotive.number }}</td>
           <td>{{ locomotive.address }}</td>
           <td>{{ locomotive.power }}</td>
-          <td>{{ locomotive.make }}</td>
-          <td>{{ locomotive.model }}</td>
+          <td>{{ locomotive.make }} {{ locomotive.model }}</td>
           <td>{{ locomotive.axles }}</td>
           <td>
-            {{ locomotive.coupler|default_if_none:'' }}
             {% if locomotive.couplerTuned %}
-              <span class="glyphicon glyphicon-ok" style="color:green" aria-hidden="true">
+              <span class="glyphicon glyphicon-ok" style="color:green" aria-hidden="true"></span>
             {% else %}
-              <span class="glyphicon glyphicon-remove" style="color:red" aria-hidden="true">
+              <span class="glyphicon glyphicon-remove" style="color:red" aria-hidden="true"></span>
             {% endif %}
+            {{ locomotive.coupler|default_if_none:'' }}
           </td>
           <td>{{ locomotive.length|default_if_none:'' }}</td>
           <td>{{ locomotive.manufacturer|default_if_none:'' }}</td>
@@ -45,7 +44,7 @@
           <td>{{ locomotive.modelnumber|default_if_none:'' }}</td>
           <td>
             {% if locomotive.notes %}
-              <span class="glyphicon glyphicon-list" aria-hidden="true">
+              <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
             {% endif %}
           </td>
             <td>

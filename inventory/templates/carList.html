@@ -10,7 +10,6 @@
             <th>Mark/Number</th>
             <th>Type</th>
             <th>Coupler</th>
-            <th>Length</th>
             <th>Livery</th>
             <th>Manufacturer</th>
             <th>Year</th>
@@ -21,7 +20,12 @@
         {% for car in carList %}
         <tr>
           <td>{{ car.railroad.mark }} {{ car.number }}</td>
-          <td>{{ car.type }}</td>
+          <td>
+            {{ car.type }}
+            {% if car.length %}
+            ({{ car.length }}')
+            {% endif %}
+          </td>
           <td>
             {% if car.couplerTuned %}
               <span class="glyphicon glyphicon-ok" style="color:green" aria-hidden="true"></span>
@@ -30,7 +34,6 @@
             {% endif %}
             {{ car.coupler|default_if_none:'' }}
           </td>
-          <td>{{ car.length|default_if_none:'' }}</td>
           <td>{{ car.livery|default_if_none:'' }}</td>
           <td>{{ car.manufacturer|default_if_none:'' }}</td>
           <td>{{ car.year|default_if_none:'' }}</td>

@@ -7,7 +7,7 @@ class CarForm(forms.ModelForm):
 
     class Meta:
         model = Car
-        fields = ('railroad', 'number', 'type', 'length', 'livery', 'coupler', 'couplerTuned', 'manufacturer', 'year', 'modelnumber', 'stocktype')
+        fields = ('railroad', 'number', 'type', 'length', 'livery', 'coupler', 'couplerTuned', 'manufacturer', 'year', 'modelnumber', 'stocktype', 'notes')
 
 
 class CarTypeForm(forms.ModelForm):
@@ -28,7 +28,7 @@ class LocomotiveForm(forms.ModelForm):
     # stocktype = forms.IntegerField(widget=forms.HiddenInput(), initial=1)
     class Meta:
         model = Locomotive
-        fields = ('railroad', 'manufacturer', 'number', 'address', 'livery', 'coupler', 'couplerTuned', 'length', 'power', 'stocktype', 'year', 'modelnumber', 'make', 'model', 'power', 'axles')
+        fields = ('railroad', 'manufacturer', 'number', 'address', 'livery', 'coupler', 'couplerTuned', 'length', 'power', 'stocktype', 'year', 'modelnumber', 'make', 'model', 'power', 'axles', 'notes')
 
 
 class MakeForm(forms.ModelForm):

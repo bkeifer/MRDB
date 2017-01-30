@@ -89,6 +89,7 @@ class RollingStock(models.Model):
     stocktype = models.ForeignKey(StockType, on_delete=models.CASCADE)
     year = models.IntegerField(null=True, blank=True)
     modelnumber = models.CharField(max_length=20, null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
 
     class Meta:
         abstract = True

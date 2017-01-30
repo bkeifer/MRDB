@@ -19,6 +19,7 @@
             <th>Manufacturer</th>
             <th>Year</th>
             <th>Model Number</th>
+            <th>Notes</th>
             <th>Actions</th>
         </tr>
         {% for locomotive in locomotiveList %}
@@ -42,6 +43,11 @@
           <td>{{ locomotive.manufacturer|default_if_none:'' }}</td>
           <td>{{ locomotive.year|default_if_none:'' }}</td>
           <td>{{ locomotive.modelnumber|default_if_none:'' }}</td>
+          <td>
+            {% if locomotive.notes %}
+              <span class="glyphicon glyphicon-list" aria-hidden="true">
+            {% endif %}
+          </td>
             <td>
                 <a class="btn btn-xs btn-info" href="/locomotive/{{locomotive.id}}/edit">Edit</a>
                 <a class="btn btn-xs btn-danger" href="/locomotive/{{locomotive.id}}/delete">Delete</a>

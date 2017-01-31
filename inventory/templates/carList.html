@@ -40,7 +40,9 @@
           <td>{{ car.modelnumber|default_if_none:'' }}</td>
           <td>
             {% if car.notes %}
-              <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+              <a href="#" data-toggle="tooltip" title="{{ car.notes }}">
+                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+              </a>
             {% endif %}
           </td>
             <td>

@@ -39,7 +39,9 @@
           <td>{{ locomotive.modelnumber|default_if_none:'' }}</td>
           <td>
             {% if locomotive.notes %}
-              <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+              <a href="#" data-toggle="tooltip" title="{{ locomotive.notes }}">
+                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+              </a>
             {% endif %}
           </td>
             <td>

@@ -23,7 +23,9 @@
           <td>
             {{ car.type }}
             {% if car.length %}
-            ({{ car.length }}')
+              ({{ car.length }}')
+            {% else %}
+              <span class="glyphicon glyphicon-question-sign" style="color:orange" aria-hidden="true"></span>
             {% endif %}
           </td>
           <td>

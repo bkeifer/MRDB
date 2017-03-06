@@ -56,3 +56,9 @@ urlpatterns = [
     url(r'^railroad/(?P<railroad_id>[0-9]+)/edit/$', views.railroad_edit, name='railroad_edit'),
     url(r'^railroad/(?P<railroad_id>[0-9]+)/delete/$', views.railroad_delete, name='railroad_delete'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

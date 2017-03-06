@@ -1,0 +1,28 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Car Features{% endblock %}
+
+{% block content %}
+
+{% if carfeatureList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Feature</th>
+            <th>Actions</th>
+        </tr>
+        {% for carfeature in carfeatureList %}
+        <tr>
+            <td>{{ carfeature.name }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/carfeature/{{carfeature.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/carfeature/{{carfeature.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No car features created.</p>
+{% endif %}
+<a class="btn btn-success" href="/carfeature/create">New Car Feature</a>
+<p>
+{% endblock %}

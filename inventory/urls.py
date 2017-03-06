@@ -1,4 +1,5 @@
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import include, url
 
 from . import views
 
@@ -9,6 +10,11 @@ urlpatterns = [
     url(r'^car/create/$', views.car_create, name='car_create'),
     url(r'^car/(?P<car_id>[0-9]+)/edit/$', views.car_edit, name='car_edit'),
     url(r'^car/(?P<car_id>[0-9]+)/delete/$', views.car_delete, name='car_delete'),
+
+    url(r'^carfeature/list/$', views.carfeature_list, name='carfeature_list'),
+    url(r'^carfeature/create/$', views.carfeature_create, name='carfeature_create'),
+    url(r'^carfeature/(?P<carfeature_id>[0-9]+)/edit/$', views.carfeature_edit, name='carfeature_edit'),
+    url(r'^carfeature/(?P<carfeature_id>[0-9]+)/delete/$', views.carfeature_delete, name='carfeature_delete'),
 
     url(r'^cartype/list/$', views.cartype_list, name='cartype_list'),
     url(r'^cartype/create/$', views.cartype_create, name='cartype_create'),

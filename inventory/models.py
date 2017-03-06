@@ -129,4 +129,15 @@ class Car(RollingStock):
         db_table = "car"
         ordering = ["railroad", "type", "number"]
     def __str__(self):
-        return self.railroad + " " + self.number + "(" + type + ")"
+        return str(self.railroad) + " " + str(self.number) + "(" + str(type) + ")"
+
+
+class CarFeature(models.Model):
+    name = models.CharField(max_length=50)
+    cars = models.ManyToManyField(Car, blank=True)
+
+    class Meta:
+        db_table = "carfeature"
+        ordering = ["name"]
+    def __str__(self):
+        return self.name

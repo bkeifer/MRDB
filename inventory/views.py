@@ -3,12 +3,12 @@ from django.template import loader
 from django.shortcuts import get_object_or_404, redirect, render
 from django.forms import HiddenInput
 
-from .forms import CarForm, CarTypeForm, CouplerForm, LocomotiveForm, MakeForm
-from .forms import ManufacturerForm, ModelForm, PowerForm, RailroadForm
+from .forms import CarForm, CarFeatureForm, CarTypeForm, CouplerForm
+from .forms import LocomotiveForm, MakeForm, ManufacturerForm, ModelForm
+from .forms import PowerForm, RailroadForm
 
-from .models import Car, CarType, Coupler, Locomotive, Make, Manufacturer, Model
-from .models import Power, Railroad, StockType
-# Create your views here.
+from .models import Car, CarFeature, CarType, Coupler, Locomotive, Make
+from .models import Manufacturer, Model, Power, Railroad, StockType
 
 def index(request):
     carList = Car.objects.order_by('id')
@@ -75,6 +75,57 @@ def car_list(request):
     template = loader.get_template('carList.html')
     context = {
         'carList': carList,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+# --------------------------------------------------------[ CAR FEATURE ]-------
+def carfeature_create(request):
+    if request.method == "POST":
+        form = CarFeatureForm(request.POST)
+        if form.is_valid():
+            carfeature = form.save()
+            return redirect('carfeature_list')
+    else:
+        form = CarFeatureForm()
+
+    template = loader.get_template('carfeatureEdit.html')
+    context = {
+        'title': "New CarFeature",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def carfeature_delete(request, carfeature_id):
+    try:
+        carfeature = CarFeature.objects.get(id=carfeature_id)
+        carfeature.delete()
+        return redirect('carfeature_list')
+    except:
+        noop = ""
+
+def carfeature_edit(request, carfeature_id):
+    carfeature = get_object_or_404(CarFeature, pk=carfeature_id)
+    if request.method == "POST":
+        form = CarFeatureForm(request.POST, instance=carfeature)
+        if form.is_valid():
+            carfeature = form.save()
+            return redirect('carfeature_list')
+    else:
+        form = CarFeatureForm(instance=carfeature)
+
+    template = loader.get_template('carfeatureEdit.html')
+    context = {
+        'title': "Edit Car Feature",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def carfeature_list(request):
+    carfeatureList = CarFeature.objects.order_by('name')
+    template = loader.get_template('carfeatureList.html')
+    context = {
+        'carfeatureList': carfeatureList,
     }
     return HttpResponse(template.render(context, request))
 

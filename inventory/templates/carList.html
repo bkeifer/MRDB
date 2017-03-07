@@ -12,7 +12,6 @@
             <th>Coupler</th>
             <!-- <th>Livery</th> -->
             <th>Manufacturer</th>
-            <th>Year</th>
             <th>Model Number</th>
             <th>Notes</th>
             <th>Actions</th>
@@ -22,7 +21,9 @@
           <td>
             {{ car.railroad.mark }} {{ car.number }}
             {% if car.livery %}
-              ({{ car.livery }})
+              <a href="#" data-toggle="tooltip" title="{{ car.livery }}">
+                <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+              </a>
             {% endif %}
           </td>
           <td>
@@ -42,8 +43,12 @@
             {{ car.coupler|default_if_none:'' }}
           </td>
           <!-- <td>{{ car.livery|default_if_none:'' }}</td> -->
-          <td>{{ car.manufacturer|default_if_none:'' }}</td>
-          <td>{{ car.year|default_if_none:'' }}</td>
+          <td>
+            {{ car.manufacturer|default_if_none:'' }}
+            {% if car.year %}
+              ({{ car.year }})
+            {% endif %}
+          </td>
           <td>{{ car.modelnumber|default_if_none:'' }}</td>
           <td>
             {% if car.notes %}

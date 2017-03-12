@@ -122,8 +122,31 @@ class Locomotive(RollingStock):
         return self.railroad + " " + self.number
 
 
+class WheelMaterial(models.Model):
+    name = models.CharField(max_length=20)
+
+    class Meta:
+        db_table = "wheelmaterial"
+        ordering = ["name"]
+    def __str__(self):
+        return self.name
+
+
+class WheelSet(models.Model):
+    name = models.CharField(max_length=50)
+    manufacturer = models.ForeignKey(Manufacturer, null=True, blank=True, on_delete=models.CASCADE)
+    material = models.ForeignKey(WheelMaterial, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "wheelset"
+        ordering = ["name"]
+    def __str__(self):
+        return str(self.manufacturer) + " " + self.name + " (" + str(self.material) + ")"
+
+
 class Car(RollingStock):
     type = models.ForeignKey(CarType, on_delete=models.CASCADE)
+    wheelset = models.ForeignKey(WheelSet, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         db_table = "car"

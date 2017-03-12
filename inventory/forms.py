@@ -1,13 +1,13 @@
 from django import forms
 
 from .models import Car, CarFeature, CarType, Coupler, Locomotive, Make
-from .models import Manufacturer, Model, Power, Railroad
+from .models import Manufacturer, Model, Power, Railroad, WheelMaterial, WheelSet
 
 class CarForm(forms.ModelForm):
 
     class Meta:
         model = Car
-        fields = ('railroad', 'number', 'type', 'length', 'livery', 'coupler', 'couplerTuned', 'manufacturer', 'year', 'modelnumber', 'stocktype', 'carfeatures', 'notes')
+        fields = ('railroad', 'number', 'type', 'length', 'livery', 'coupler', 'couplerTuned', 'wheelset', 'manufacturer', 'year', 'modelnumber', 'stocktype', 'carfeatures', 'notes')
 
     carfeatures = forms.ModelMultipleChoiceField(queryset=CarFeature.objects.all(), required=False)
     # Overriding __init__ here allows us to provide initial
@@ -108,3 +108,17 @@ class RailroadForm(forms.ModelForm):
     class Meta:
         model = Railroad
         fields = ('mark', 'name')
+
+
+class WheelMaterialForm(forms.ModelForm):
+
+    class Meta:
+        model = WheelMaterial
+        fields = ('name',)
+
+
+class WheelSetForm(forms.ModelForm):
+
+    class Meta:
+        model = WheelSet
+        fields = ('manufacturer', 'name', 'material')

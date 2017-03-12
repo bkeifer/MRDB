@@ -1,0 +1,28 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Wheel Materials{% endblock %}
+
+{% block content %}
+
+{% if wheelmaterialList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for wheelmaterial in wheelmaterialList %}
+        <tr>
+            <td>{{ wheelmaterial.name }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/wheelmaterial/{{wheelmaterial.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/wheelmaterial/{{wheelmaterial.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No wheel materials created.</p>
+{% endif %}
+<a class="btn btn-success" href="/wheelmaterial/create">New Wheel Material</a>
+<p>
+{% endblock %}

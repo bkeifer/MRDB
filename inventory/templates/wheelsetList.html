@@ -1,0 +1,32 @@
+{% extends "include/base.html" %}
+
+{% block title %}All Wheel Sets{% endblock %}
+
+{% block content %}
+
+{% if wheelsetList %}
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Manufacturer</th>
+            <th>Name</th>
+            <th>Material</th>
+            <th>Actions</th>
+        </tr>
+        {% for wheelset in wheelsetList %}
+        <tr>
+            <td>{{ wheelset.manufacturer }}</td>
+            <td>{{ wheelset.name }}</td>
+            <td>{{ wheelset.material }}</td>
+            <td>
+                <a class="btn btn-xs btn-info" href="/wheelset/{{wheelset.id}}/edit">Edit</a>
+                <a class="btn btn-xs btn-danger" href="/wheelset/{{wheelset.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No wheelsets created.</p>
+{% endif %}
+<a class="btn btn-success" href="/wheelset/create">New Wheel Set</a>
+<p>
+{% endblock %}

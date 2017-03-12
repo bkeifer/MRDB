@@ -55,6 +55,16 @@ urlpatterns = [
     url(r'^railroad/create/$', views.railroad_create, name='railroad_create'),
     url(r'^railroad/(?P<railroad_id>[0-9]+)/edit/$', views.railroad_edit, name='railroad_edit'),
     url(r'^railroad/(?P<railroad_id>[0-9]+)/delete/$', views.railroad_delete, name='railroad_delete'),
+
+    url(r'^wheelmaterial/list/$', views.wheelmaterial_list, name='wheelmaterial_list'),
+    url(r'^wheelmaterial/create/$', views.wheelmaterial_create, name='wheelmaterial_create'),
+    url(r'^wheelmaterial/(?P<wheelmaterial_id>[0-9]+)/edit/$', views.wheelmaterial_edit, name='wheelmaterial_edit'),
+    url(r'^wheelmaterial/(?P<wheelmaterial_id>[0-9]+)/delete/$', views.wheelmaterial_delete, name='wheelmaterial_delete'),
+
+    url(r'^wheelset/list/$', views.wheelset_list, name='wheelset_list'),
+    url(r'^wheelset/create/$', views.wheelset_create, name='wheelset_create'),
+    url(r'^wheelset/(?P<wheelset_id>[0-9]+)/edit/$', views.wheelset_edit, name='wheelset_edit'),
+    url(r'^wheelset/(?P<wheelset_id>[0-9]+)/delete/$', views.wheelset_delete, name='wheelset_delete'),
 ]
 
 if settings.DEBUG:

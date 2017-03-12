@@ -5,10 +5,11 @@ from django.forms import HiddenInput
 
 from .forms import CarForm, CarFeatureForm, CarTypeForm, CouplerForm
 from .forms import LocomotiveForm, MakeForm, ManufacturerForm, ModelForm
-from .forms import PowerForm, RailroadForm
+from .forms import PowerForm, RailroadForm, WheelMaterialForm, WheelSetForm
 
 from .models import Car, CarFeature, CarType, Coupler, Locomotive, Make
 from .models import Manufacturer, Model, Power, Railroad, StockType
+from .models import WheelMaterial, WheelSet
 
 def index(request):
     carList = Car.objects.order_by('id')
@@ -537,3 +538,105 @@ def model_list(request):
         'modelList': modelList,
     }
     return HttpResponse(template.render(context, request))
+
+
+# --------------------------------------------------------[ WHEELMATERIAL ]-----
+def wheelmaterial_create(request):
+    if request.method == "POST":
+        form = WheelMaterialForm(request.POST)
+        if form.is_valid():
+            wheelmaterial = form.save()
+            return redirect('wheelmaterial_list')
+    else:
+        form = WheelMaterialForm()
+
+    template = loader.get_template('wheelmaterialEdit.html')
+    context = {
+        'title': "New Wheel Material",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def wheelmaterial_edit(request, wheelmaterial_id):
+    wheelmaterial = get_object_or_404(WheelMaterial, pk=wheelmaterial_id)
+    if request.method == "POST":
+        form = WheelMaterialForm(request.POST, instance=wheelmaterial)
+        if form.is_valid():
+            wheelmaterial = form.save()
+            return redirect('wheelmaterial_list')
+    else:
+        form = WheelMaterialForm(instance=wheelmaterial)
+
+    template = loader.get_template('wheelmaterialEdit.html')
+    context = {
+        'title': "Edit Wheel Material",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def wheelmaterial_list(request):
+    wheelmaterialList = WheelMaterial.objects.order_by('name')
+    template = loader.get_template('wheelmaterialList.html')
+    context = {
+        'wheelmaterialList': wheelmaterialList,
+    }
+    return HttpResponse(template.render(context, request))
+
+def wheelmaterial_delete(request, wheelmaterial_id):
+    try:
+        wheelmaterial = WheelMaterial.objects.get(id=wheelmaterial_id)
+        wheelmaterial.delete()
+        return redirect('wheelmaterial_list')
+    except:
+        noop = ""
+
+
+# --------------------------------------------------------[ WHEELSET ]----------
+def wheelset_create(request):
+    if request.method == "POST":
+        form = WheelSetForm(request.POST)
+        if form.is_valid():
+            wheelset = form.save()
+            return redirect('wheelset_list')
+    else:
+        form = WheelSetForm()
+
+    template = loader.get_template('wheelsetEdit.html')
+    context = {
+        'title': "New Wheel Set",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def wheelset_edit(request, wheelset_id):
+    wheelset = get_object_or_404(WheelSet, pk=wheelset_id)
+    if request.method == "POST":
+        form = WheelSetForm(request.POST, instance=wheelset)
+        if form.is_valid():
+            wheelset = form.save()
+            return redirect('wheelset_list')
+    else:
+        form = WheelSetForm(instance=wheelset)
+
+    template = loader.get_template('wheelsetEdit.html')
+    context = {
+        'title': "Edit Wheel Set",
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+def wheelset_list(request):
+    wheelsetList = WheelSet.objects.order_by('manufacturer', 'name')
+    template = loader.get_template('wheelsetList.html')
+    context = {
+        'wheelsetList': wheelsetList,
+    }
+    return HttpResponse(template.render(context, request))
+
+def wheelset_delete(request, wheelset_id):
+    try:
+        wheelset = WheelSet.objects.get(id=wheelset_id)
+        wheelset.delete()
+        return redirect('wheelset_list')
+    except:
+        noop = ""

@@ -7,7 +7,7 @@ class CarForm(forms.ModelForm):
 
     class Meta:
         model = Car
-        fields = ('railroad', 'number', 'type', 'length', 'livery', 'coupler', 'couplerTuned', 'wheelset', 'manufacturer', 'year', 'modelnumber', 'stocktype', 'carfeatures', 'notes')
+        fields = ('railroad', 'number', 'type', 'length', 'weight', 'livery', 'coupler', 'couplerTuned', 'wheelset', 'manufacturer', 'year', 'modelnumber', 'stocktype', 'carfeatures', 'notes')
 
     carfeatures = forms.ModelMultipleChoiceField(queryset=CarFeature.objects.all(), required=False)
     # Overriding __init__ here allows us to provide initial

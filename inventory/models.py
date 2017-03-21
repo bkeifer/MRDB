@@ -89,6 +89,7 @@ class RollingStock(models.Model):
     coupler = models.ForeignKey(Coupler, null=True, blank=True, on_delete=models.CASCADE)
     couplerTuned = models.NullBooleanField()
     length = models.IntegerField(null=True, blank=True)
+    weight = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     stocktype = models.ForeignKey(StockType, on_delete=models.CASCADE)
     year = models.IntegerField(null=True, blank=True)
     modelnumber = models.CharField(max_length=20, null=True, blank=True)

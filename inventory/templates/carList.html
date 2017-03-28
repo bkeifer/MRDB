@@ -56,6 +56,32 @@
                 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
               </a>
             {% endif %}
+            {% if car.weight %}
+              {% if car.length %}
+
+                <a href="#" data-toggle="tooltip"
+                  title="Weight: {{ car.weight }} oz.&#13;&#10;Ideal: {{ car.idealWeight }} oz.&#13;&#10;{{ car.weightDifferencePercentage }}% {{ car.weightOverOrUnder }}">
+                  <!-- {{ car.lengthInInches }}"
+                  [{{car.weight }}/{{ car.idealWeight }} ({{ car.weightDifference }}) -
+                  {{ car.weightDifferencePercentage }}%
+                  {% if car.isOverWeight %}
+                    OVER
+                  {% elif car.isUnderWeight %}
+                    UNDER
+                  {% endif %} -->
+                  <span class="glyphicon glyphicon-scale"
+                  {% if car.weightDifferencePercentage <= 5 %}
+                    style="color:green"
+                  {% elif car.weightDifferencePercentage <= 10 %}
+                    style="color:orange"
+                  {% else %}
+                    style="color:red"
+                  {% endif %}
+                  aria-hidden="true"></span>
+
+                </a>
+              {% endif %}
+            {% endif %}
           </td>
             <td>
                 <a class="btn btn-xs btn-info" href="/car/{{car.id}}/edit">Edit</a>

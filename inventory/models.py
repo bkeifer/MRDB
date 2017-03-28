@@ -149,6 +149,45 @@ class Car(RollingStock):
     type = models.ForeignKey(CarType, on_delete=models.CASCADE)
     wheelset = models.ForeignKey(WheelSet, null=True, blank=True, on_delete=models.CASCADE)
 
+    @property
+    def lengthInInches(self):
+        return round(((float(self.length) * 12) / 87), 1)
+
+    @property
+    def idealWeight(self):
+        return (self.lengthInInches * .5) + 1
+
+    @property
+    def weightDifference(self):
+        return self.idealWeight - float(self.weight)
+
+    @property
+    def isOverWeight(self):
+        if float(self.weight) > self.idealWeight:
+            return True
+        else:
+            return False
+
+    @property
+    def isUnderWeight(self):
+        if float(self.weight) < self.idealWeight:
+            return True
+        else:
+            return False
+
+    @property
+    def weightDifferencePercentage(self):
+        return abs(int(round((float(self.weightDifference/self.idealWeight) * 100), 0)))
+
+    @property
+    def weightOverOrUnder(self):
+        if float(self.weight) < self.idealWeight:
+            return "UNDER"
+        elif float(self.weight) > self.idealWeight:
+            return "OVER"
+        else:
+            return ""
+
     class Meta:
         db_table = "car"
         ordering = ["railroad", "type", "number"]
